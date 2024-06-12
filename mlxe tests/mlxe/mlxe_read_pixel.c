@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlxe_free_sprite.c                                 :+:      :+:    :+:   */
+/*   mlxe_read_pixel.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 22:21:40 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/12 22:21:40 by lfarhi           ###   ########.fr       */
+/*   Created: 2024/06/12 23:26:37 by lfarhi            #+#    #+#             */
+/*   Updated: 2024/06/12 23:26:37 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <mlx.h>
 #include "mlxe.h"
 
-void	mlxe_free_sprite(t_sprite *sprite)
+t_color	mlxe_read_pixel(t_texture *texture, int x, int y)
 {
-	free(sprite);
+	int		color;
+	char	*dst;
+
+	dst = texture->addr + (y * texture->size_line + x * (texture->bits_per_pixel / 8));
+	color = *(unsigned int *)dst;
+	return ((t_color){color});
 }

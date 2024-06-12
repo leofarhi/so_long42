@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 19:08:35 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/12 19:10:03 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/06/12 23:23:01 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_texture	*mlxe_load_texture(t_window *window, char *path, bool add_garbage)
 	texture = malloc(sizeof(t_texture));
 	if (!texture)
 		return (NULL);
-	texture->img = mlx_xpm_file_to_image(window->mlx, path, &texture->size[0], &texture->size[1]);
+	texture->img = mlx_xpm_file_to_image(window->mlx, path, &texture->size.x, &texture->size.y);
 	if (!texture->img)
 	{
 		free(texture);
@@ -35,5 +35,6 @@ t_texture	*mlxe_load_texture(t_window *window, char *path, bool add_garbage)
 			return (NULL);
 		}
 	}
+	mlx_get_data_addr(texture->img, &texture->bits_per_pixel, &texture->size_line, &texture->endian);
 	return (texture);
 }

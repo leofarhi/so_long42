@@ -15,6 +15,6 @@
 
 void	mlxe_render(t_window *window)
 {
-	mlx_put_image_to_window(window->mlx, window->win, window->buffer, 0, 0);
+	mlx_put_image_to_window(window->mlx, window->win, window->buffer->img, 0, 0);
 	mlx_do_sync(window->mlx);
 }

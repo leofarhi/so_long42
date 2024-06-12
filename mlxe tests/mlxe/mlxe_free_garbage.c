@@ -12,17 +12,34 @@
 
 #include "mlxe.h"
 
-static void clear_garbage(void *ptr)
+static void clear_garbage(t_window *window, void *ptr)
 {
 	t_garbage	*g;
 	
 	g = (t_garbage *)ptr;
 	if (g->free)
-		g->free(g->ptr);
+		g->free(window, g->ptr);
 	free(g);
+}
+
+void	mlxe_free(t_window *window, void *ptr)
+{
+	(void)window;
+	free(ptr);
 }
 
 void	mlxe_free_garbage(t_window *window)
 {
-	ft_lstclear(&window->garbage, clear_garbage);
+	t_list	*tmp;
+	t_list	*next;
+
+	tmp = window->garbage;
+	while (tmp)
+	{
+		next = tmp->next;
+		clear_garbage(window, tmp->content);
+		free(tmp);
+		tmp = next;
+	}
+	window->garbage = NULL;
 }

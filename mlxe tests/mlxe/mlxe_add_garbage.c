@@ -6,13 +6,13 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 19:01:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/12 19:02:23 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/06/12 23:10:08 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlxe.h"
 
-bool	mlxe_add_garbage(t_window *window, void *ptr, void (*free)(void *))
+bool	mlxe_add_garbage(t_window *window, void *ptr, void (*free)(t_window *, void *))
 {
 	t_garbage	*g;
 

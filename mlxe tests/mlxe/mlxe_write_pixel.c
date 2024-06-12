@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlxe_free_sprite.c                                 :+:      :+:    :+:   */
+/*   mlxe_write_pixel.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 22:21:40 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/12 22:21:40 by lfarhi           ###   ########.fr       */
+/*   Created: 2024/06/12 23:26:29 by lfarhi            #+#    #+#             */
+/*   Updated: 2024/06/12 23:26:29 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <mlx.h>
 #include "mlxe.h"
 
-void	mlxe_free_sprite(t_sprite *sprite)
+void	mlxe_write_pixel(t_texture *texture, int x, int y, t_color color)
 {
-	free(sprite);
+	*(unsigned int *)(texture->addr + (y * texture->size_line + x * (texture->bits_per_pixel / 8))) = color;
 }

@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 19:05:13 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/12 19:10:13 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/06/12 23:22:54 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ t_texture	*mlxe_create_texture(t_window *window, int width, int height, bool add
 		free(texture);
 		return (NULL);
 	}
-	texture->size[0] = width;
-	texture->size[1] = height;
+	texture->size.x = width;
+	texture->size.y = height;
 	if (add_garbage)
 	{
 		if (!mlxe_add_garbage(window, texture, mlxe_free_texture))
@@ -37,5 +37,6 @@ t_texture	*mlxe_create_texture(t_window *window, int width, int height, bool add
 			return (NULL);
 		}
 	}
+	mlx_get_data_addr(texture->img, &texture->bits_per_pixel, &texture->size_line, &texture->endian);
 	return (texture);
 }
