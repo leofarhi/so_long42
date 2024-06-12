@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 15:18:04 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/12 15:21:10 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/06/12 19:04:16 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void clear_garbage(void *ptr)
 
 void	mlxe_destroy(t_window *window)
 {
-	ft_lstclear(&window->garbage, clear_garbage);
+	mlxe_free_garbage(window);
 	mlx_destroy_image(window->mlx, window->buffer);
 	mlx_destroy_window(window->mlx, window->win);
 	free(window);

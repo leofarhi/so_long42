@@ -6,7 +6,7 @@
 #    By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 15:45:34 by lfarhi            #+#    #+#              #
-#    Updated: 2024/06/12 17:57:18 by lfarhi           ###   ########.fr        #
+#    Updated: 2024/06/12 18:56:13 by lfarhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ CFLAGS = -Wall -Wextra -Werror
 LIBFT_FLAGS = -L ./libft -I ./libft -lft
 MLX_FLAGS = -L ./minilibx -I ./minilibx -lmlx -Imlx -lXext -lX11 -lm -lz
 MLXE_FLAGS = -L ./mlxe -I ./mlxe -lmlxe
-LFLAGS = ${MLX_FLAGS} ${LIBFT_FLAGS} ${MLXE_FLAGS}
+LFLAGS = ${MLXE_FLAGS} ${MLX_FLAGS} ${LIBFT_FLAGS}
 
 all: ${NAME}
 
@@ -47,7 +47,10 @@ clean:
 
 fclean: clean
 	rm -f ${NAME}
+	@make -C minilibx clean
+	@make -C libft fclean
+	@make -C mlxe fclean
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus mlx libft mlxe

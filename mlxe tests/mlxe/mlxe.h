@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:35:51 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/12 17:50:52 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/06/12 19:08:27 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include "../libft/libft.h"
+#include <libft.h>
 
 /*
 ** WELCOME TO MiniLibX Extended
@@ -135,7 +135,7 @@ void		mlxe_draw_line(t_window *window, int x1, int y1, int x2, int y2, int color
 void		mlxe_draw_rect(t_window *window, int x, int y, int width, int height, int color);
 void		mlxe_draw_fillrect(t_window *window, int x, int y, int width, int height, int color);
 
-t_texture	*mlxe_create_texture(t_window *window, int width, int height, bool add_garbage);
+t_texture	*mlxe_create_texture(t_window *window, int width, int height, bool add_garbage);//done
 t_texture	*mlxe_load_texture(t_window *window, char *path, bool add_garbage);
 t_sprite	*mlxe_create_sprite(t_texture *texture, int x, int y, int width, int height, bool add_garbage);
 
@@ -147,7 +147,7 @@ void		mlxe_draw_subtexture(t_window *window, t_texture *texture, int x, int y,
 				int width, int height, int sx, int sy);
 void		mlxe_draw_sprite(t_window *window, t_sprite *sprite, int x, int y);
 
-bool		mlxe_add_garbage(t_window *window, void *ptr, void (*free)(void *));
-bool		mlxe_free_garbage(t_window *window);
+bool		mlxe_add_garbage(t_window *window, void *ptr, void (*free)(void *));//done
+void		mlxe_free_garbage(t_window *window);//done
 
 #endif

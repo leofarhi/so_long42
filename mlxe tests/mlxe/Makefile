@@ -6,11 +6,11 @@
 #    By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/12 16:08:55 by lfarhi            #+#    #+#              #
-#    Updated: 2024/06/12 17:59:54 by lfarhi           ###   ########.fr        #
+#    Updated: 2024/06/12 18:32:17 by lfarhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = mlxe.a
+NAME = libmlxe.a
 SRC = ./
 SRCS = ${SRC}mlxe_create_sprite.c ${SRC}mlxe_draw_line.c \
 ${SRC}mlxe_draw_sprite.c ${SRC}mlxe_free_sprite.c ${SRC}mlxe_read_pixel_w.c \
@@ -46,13 +46,9 @@ libft:
 
 clean:
 	rm -f ${OBJS}
-	@make -C ../minilibx clean
-	@make -C ../libft clean
 
 fclean: clean
 	rm -f ${NAME}
-	@make -C ../minilibx clean
-	@make -C ../libft fclean
 
 re: fclean all
 

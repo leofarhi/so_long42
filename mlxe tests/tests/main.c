@@ -6,11 +6,12 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:15:25 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/12 17:58:24 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/06/12 18:55:00 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlxe.h"
+#include <mlxe.h>
+#include <mlx.h>
 #include <stdio.h>
 
 int	main(void)
