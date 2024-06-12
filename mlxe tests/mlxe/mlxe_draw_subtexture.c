@@ -26,14 +26,12 @@ static void	change_bounds(t_window *window, int *x, int *y, t_rect *rect, t_text
 		rect->y -= *y;
 		*y = 0;
 	}
-	if (*x + rect->width > texture->size.x)
-		rect->width = texture->size.x - *x;
-	if (*y + rect->height > texture->size.y)
-		rect->height = texture->size.y - *y;
+	if (rect->x + rect->width > texture->size.x)
+		rect->width = texture->size.x - rect->x;
+	if (rect->y + rect->height > texture->size.y)
+		rect->height = texture->size.y - rect->y;
 	if (*x + rect->width > window->buffer->size.x)
 		rect->width = window->buffer->size.x - *x;
-	if (*y + rect->height > window->buffer->size.y)
-		rect->height = window->buffer->size.y - *y;
 }
 
 void	mlxe_draw_subtexture(t_window *window, t_texture *texture, int x, int y, t_rect rect)

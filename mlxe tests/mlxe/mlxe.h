@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:35:51 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/12 23:39:51 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/06/13 01:01:35 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_sprite
 {
 	t_texture *texture;
 	t_rect	rect;
+	t_vector2 offset;
 }				t_sprite;
 
 typedef struct s_garbage
@@ -87,6 +88,8 @@ typedef struct s_window
 	t_texture	*buffer;
 	t_list	*garbage;
 	bool		running;
+	void		*data;
+	void 		(*funct_ptr)(t_window *, void *data);
 }				t_window;
 
 #define uint unsigned int
@@ -154,17 +157,17 @@ void		mlxe_clear(t_window *window);//done
 void		mlxe_render(t_window *window);//done
 void		mlxe_destroy(t_window *window);//done
 void		mlxe_update_input(t_window *window);//TODO
-void		mlxe_loop(t_window *window, int (*funct_ptr)(t_window *));
-void		mlxe_loop_end(t_window *window);
+void		mlxe_loop(t_window *window, void (*funct_ptr)(t_window *, void *data), void *data);//done
+void		mlxe_loop_end(t_window *window);//done
 
-int			mlxe_color(int r, int g, int b);//done
+t_color		mlxe_color(int r, int g, int b);//done
 
 void		mlxe_draw_pixel(t_texture *texture, int x, int y, t_color color);//done
-t_color			mlxe_get_pixel(t_texture *texture, int x, int y);//done
+t_color		mlxe_get_pixel(t_texture *texture, int x, int y);//done
 void		mlxe_write_pixel(t_texture *texture, int x, int y, t_color color);//done
-t_color			mlxe_read_pixel(t_texture *texture, int x, int y);//done
+t_color		mlxe_read_pixel(t_texture *texture, int x, int y);//done
 
-void		mlxe_draw_line(t_window *window, t_vector2 p1, t_vector2 p2, t_color color);
+void		mlxe_draw_line(t_window *window, t_vector2 p1, t_vector2 p2, t_color color);//done
 void		mlxe_draw_rect(t_window *window, t_rect rect, t_color color);//done
 void		mlxe_draw_fillrect(t_window *window, t_rect rect, t_color color);//done
 

@@ -13,9 +13,17 @@
 #include <mlx.h>
 #include "mlxe.h"
 
-void	mlxe_loop(t_window *window, int (*funct_ptr)(t_window *))
+static int	mlxe_loop_(t_window *window)
 {
-	mlx_loop_hook(window->mlx, funct_ptr, window);
-	mlx_loop(window->mlx);
+	window->funct_ptr(window, window->data);
+	return (0);
+}
+
+void	mlxe_loop(t_window *window, void (*funct_ptr)(t_window *, void *data), void *data)
+{
+	window->data = data;
+	window->funct_ptr = funct_ptr;
 	window->running = true;
+	mlx_loop_hook(window->mlx, mlxe_loop_, window);
+	mlx_loop(window->mlx);
 }

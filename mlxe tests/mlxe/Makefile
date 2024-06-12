@@ -6,7 +6,7 @@
 #    By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/12 16:08:55 by lfarhi            #+#    #+#              #
-#    Updated: 2024/06/12 23:41:06 by lfarhi           ###   ########.fr        #
+#    Updated: 2024/06/13 01:13:13 by lfarhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,25 +24,22 @@ ${SRC}mlxe_read_pixel.c ${SRC}mlxe_write_pixel.c \
 
 OBJS = ${SRCS:.c=.o}
 
+LIBFT = ../libft/libft.a
+MINILIBX = ../minilibx/libmlx.a
+
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-LIBFT_FLAGS = -L ../libft -I ../libft -lft
-MLX_FLAGS = -L ../minilibx -I ../minilibx -lmlx -Imlx -lXext -lX11 -lm -lz
-LFLAGS = ${MLX_FLAGS} ${LIBFT_FLAGS}
+CFLAGS = -Wall -Wextra -Werror -I ../libft -I ../minilibx
 
 all: ${NAME}
 
-${NAME}: mlx libft ${OBJS}
+${NAME}: ${MINILIBX} ${LIBFT} ${OBJS}
 	ar rcs ${NAME} ${OBJS}
 
-mlx:
+${MINILIBX}:
 	@make -C ../minilibx
 
-libft:
+${LIBFT}:
 	@make -C ../libft
-
-%.o: %.c
-	${CC} ${CFLAGS} ${LFLAGS} -c $< -o ${<:.c=.o}
 
 clean:
 	rm -f ${OBJS}
@@ -52,4 +49,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re mlx libft

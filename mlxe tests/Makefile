@@ -6,7 +6,7 @@
 #    By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 15:45:34 by lfarhi            #+#    #+#              #
-#    Updated: 2024/06/12 18:56:13 by lfarhi           ###   ########.fr        #
+#    Updated: 2024/06/13 01:15:21 by lfarhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,20 +23,24 @@ MLX_FLAGS = -L ./minilibx -I ./minilibx -lmlx -Imlx -lXext -lX11 -lm -lz
 MLXE_FLAGS = -L ./mlxe -I ./mlxe -lmlxe
 LFLAGS = ${MLXE_FLAGS} ${MLX_FLAGS} ${LIBFT_FLAGS}
 
+LIBFT = libft/libft.a
+MINILIBX = minilibx/libmlx.a
+MLXE = mlxe/libmlxe.a
+
 all: ${NAME}
 
-${NAME}: mlx libft mlxe ${OBJS}
+${NAME}: ${MINILIBX} ${LIBFT} ${MLXE} ${OBJS}
 	${CC} ${CFLAGS} ${OBJS} ${LFLAGS} -o ${NAME}
 
 bonus: all
 
-mlx:
+${MINILIBX}:
 	@make -C minilibx
 
-mlxe:
+${MLXE}:
 	@make -C mlxe
 
-libft:
+${LIBFT}:
 	@make -C libft
 
 %.o: %.c
@@ -44,6 +48,9 @@ libft:
 
 clean:
 	rm -f ${OBJS}
+	@make -C minilibx clean
+	@make -C libft clean
+	@make -C mlxe clean
 
 fclean: clean
 	rm -f ${NAME}

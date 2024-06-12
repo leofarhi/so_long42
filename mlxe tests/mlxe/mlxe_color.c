@@ -6,14 +6,14 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 15:14:16 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/12 15:14:31 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/06/13 01:01:20 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "mlxe.h"
 
-int	mlxe_color(int r, int g, int b)
+t_color	mlxe_color(int r, int g, int b)
 {
 	return ((r << 16) | (g << 8) | b);
 }

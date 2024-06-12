@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 19:08:35 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/12 23:23:01 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/06/13 00:11:11 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ t_texture	*mlxe_load_texture(t_window *window, char *path, bool add_garbage)
 		free(texture);
 		return (NULL);
 	}
+	texture->addr = mlx_get_data_addr(texture->img, &texture->bits_per_pixel, &texture->size_line, &texture->endian);
+	if (!texture->addr)
+	{
+		mlx_destroy_image(window->mlx, texture->img);
+		free(texture);
+		return (NULL);
+	}
 	if (add_garbage)
 	{
 		if (!mlxe_add_garbage(window, texture, mlxe_free_texture))
@@ -35,6 +42,5 @@ t_texture	*mlxe_load_texture(t_window *window, char *path, bool add_garbage)
 			return (NULL);
 		}
 	}
-	mlx_get_data_addr(texture->img, &texture->bits_per_pixel, &texture->size_line, &texture->endian);
 	return (texture);
 }

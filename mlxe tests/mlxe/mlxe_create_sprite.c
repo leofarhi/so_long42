@@ -22,6 +22,7 @@ t_sprite	*mlxe_create_sprite(t_window *window, t_texture *texture,
 		return (NULL);
 	sprite->texture = texture;
 	sprite->rect = rect;
+	sprite->offset = (vec2){0, 0};
 	if (add_garbage)
 		mlxe_add_garbage(window, sprite, mlxe_free);
 	return (sprite);
