@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "mlxe.h"
-#include <stdio.h>
 
 static void	change_bounds(t_window *window,
 	t_vector2 *pos, t_rect *rect, t_texture *texture)

@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 15:14:38 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/13 18:01:39 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/06/13 18:43:45 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "mlxe_hooks.h"
 #include <X11/X.h>
 #include <X11/keysym.h>
-#include <stdio.h>
 
 static int	handle_close(t_window *data)
 {
