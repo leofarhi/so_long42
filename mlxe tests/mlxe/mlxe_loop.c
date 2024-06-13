@@ -15,7 +15,10 @@
 
 static int	mlxe_loop_(t_window *window)
 {
-	window->funct_ptr(window, window->data);
+	if (window->running)
+		window->funct_ptr(window, window->data);
+	else
+		mlx_loop_end(window->mlx);
 	return (0);
 }
 

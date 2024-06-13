@@ -6,13 +6,16 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:15:25 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/13 00:29:52 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/06/13 16:19:10 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlxe.h>
 #include <mlx.h>
 #include <stdio.h>
+#include <unistd.h>
+#include <X11/X.h>
+#include <X11/keysym.h>
 
 void	loop(t_window *window, void *data)
 {
@@ -21,12 +24,25 @@ void	loop(t_window *window, void *data)
 	(void)window;
 	(void)texture;
 
+	if (is_key_down(window, XK_b))
+		printf("B is down\n");
+	if (is_key_pressed(window, XK_b))
+		printf("B ");
+	if (is_key_released(window, XK_b))
+		printf("B is released\n");
+	if (is_key_down(window, MOUSE_LEFT))
+		printf("Left mouse button is down\n");
+	printf("Mouse position: %d, %d\n", window->mouse.x, window->mouse.y);
+
 	mlxe_clear(window);
 	mlxe_draw_texture(window, texture, i, 0);
+	mlxe_draw_texture(window, texture, i + 100, 0);
+	mlxe_draw_subtexture(window, texture, 200, 200, (t_rect){20, 20, 100, 100});
 	i = (i + 1) % 800;
 	mlxe_draw_line(window, (vec2){-100, 0}, (vec2){799+100, 599}, 0x00FF00FF);
 	mlxe_render(window);
 }
+
 
 int	main(void)
 {
@@ -35,12 +51,13 @@ int	main(void)
 	window = mlxe_init(800, 600, "Hello, world!");
 	if (!window)
 		return (1);
-	t_texture	*texture = mlxe_load_texture(window, "tests/0.xpm", true);
+	t_texture	*texture = mlxe_load_texture(window, "tests/test.xpm", true);
 	if (!texture)
 	{
 		printf("Failed to load texture\n");
 		return (1);
 	}
+	
 	mlxe_loop(window, loop, texture);
 	mlxe_destroy(window);
 	printf("Hello, world!\n");

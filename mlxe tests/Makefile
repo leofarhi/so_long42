@@ -6,7 +6,7 @@
 #    By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 15:45:34 by lfarhi            #+#    #+#              #
-#    Updated: 2024/06/13 01:15:21 by lfarhi           ###   ########.fr        #
+#    Updated: 2024/06/13 13:26:13 by lfarhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRCS = ${SRC}main.c
 OBJS = ${SRCS:.c=.o}
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 LIBFT_FLAGS = -L ./libft -I ./libft -lft
 MLX_FLAGS = -L ./minilibx -I ./minilibx -lmlx -Imlx -lXext -lX11 -lm -lz
 MLXE_FLAGS = -L ./mlxe -I ./mlxe -lmlxe

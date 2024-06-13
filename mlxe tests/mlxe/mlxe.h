@@ -6,13 +6,14 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:35:51 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/13 01:01:35 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/06/13 16:10:04 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MLX_EXT_H
 # define MLX_EXT_H
 
+#include "mlxe_keys.h"
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -90,6 +91,8 @@ typedef struct s_window
 	bool		running;
 	void		*data;
 	void 		(*funct_ptr)(t_window *, void *data);
+	char		keys[MAX_ALL_KEYS];
+	vec2		mouse;
 }				t_window;
 
 #define uint unsigned int
@@ -156,7 +159,12 @@ t_window	*mlxe_init(int width, int height, char *title);//done
 void		mlxe_clear(t_window *window);//done
 void		mlxe_render(t_window *window);//done
 void		mlxe_destroy(t_window *window);//done
-void		mlxe_update_input(t_window *window);//TODO
+
+void		mlxe_update_input(t_window *window);//done
+bool 		is_key_down(t_window *window, int keysym);//done
+bool 		is_key_pressed(t_window *window, int keysym);//done
+bool 		is_key_released(t_window *window, int keysym);//done
+
 void		mlxe_loop(t_window *window, void (*funct_ptr)(t_window *, void *data), void *data);//done
 void		mlxe_loop_end(t_window *window);//done
 

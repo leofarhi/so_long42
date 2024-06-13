@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "mlxe.h"
+#include <stdio.h>
 
 static void	change_bounds(t_window *window, int *x, int *y, t_rect *rect, t_texture *texture)
 {
@@ -36,9 +37,10 @@ static void	change_bounds(t_window *window, int *x, int *y, t_rect *rect, t_text
 
 void	mlxe_draw_subtexture(t_window *window, t_texture *texture, int x, int y, t_rect rect)
 {
-	int			i;
-	int			j;
-	t_color		color;
+	int				i;
+	int				j;
+	unsigned int	alpha;
+	t_color			color;
 
 	change_bounds(window, &x, &y, &rect, texture);
 	i = 0;
@@ -48,7 +50,8 @@ void	mlxe_draw_subtexture(t_window *window, t_texture *texture, int x, int y, t_
 		while (j < rect.width)
 		{
 			color = mlxe_read_pixel(texture, rect.x + j, rect.y + i);
-			if (color != 0)
+			alpha = color & 0xFF000000;
+			if (!alpha)
 				mlxe_write_pixel(window->buffer, x + j, y + i, color);
 			j++;
 		}
