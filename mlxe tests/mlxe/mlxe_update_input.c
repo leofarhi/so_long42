@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:44:15 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/13 16:14:20 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/06/13 16:46:54 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	mlxe_update_input(t_window *window)
 	int	i;
 
 	i = 0;
-	mlx_mouse_get_pos(window->mlx, window->win, &window->mouse.x, &window->mouse.y);
+	mlx_mouse_get_pos(window->mlx, window->win,
+		&window->mouse.x, &window->mouse.y);
 	while (i < MAX_ALL_KEYS)
 	{
 		if ((window->keys[i] & 0xF) == STATE_ONDOWN)
@@ -29,16 +30,17 @@ void	mlxe_update_input(t_window *window)
 	}
 }
 
-bool	is_key_down(t_window *window, int keysym)
+t_bool	is_key_down(t_window *window, int keysym)
 {
-	return (window->keys[keysym] & 0xF) == STATE_ONDOWN;
-}
-bool	is_key_pressed(t_window *window, int keysym)
-{
-	return (window->keys[keysym] & 0xF) == STATE_ONPRESSED;
+	return ((window->keys[keysym] & 0xF) == STATE_ONDOWN);
 }
 
-bool	is_key_released(t_window *window, int keysym)
+t_bool	is_key_pressed(t_window *window, int keysym)
 {
-	return (window->keys[keysym] & 0xF) == STATE_ONRELEASE;
+	return ((window->keys[keysym] & 0xF) == STATE_ONPRESSED);
+}
+
+t_bool	is_key_released(t_window *window, int keysym)
+{
+	return ((window->keys[keysym] & 0xF) == STATE_ONRELEASE);
 }

@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 15:21:36 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/13 15:53:41 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/06/13 17:06:55 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	mlxe_render(t_window *window)
 {
 	mlxe_update_input(window);
 	mlx_clear_window(window->mlx, window->win);
-	mlx_put_image_to_window(window->mlx, window->win, window->buffer->img, 0, 0);
+	mlx_put_image_to_window(window->mlx,
+		window->win, window->buffer->img, 0, 0);
 	mlx_do_sync(window->mlx);
 }

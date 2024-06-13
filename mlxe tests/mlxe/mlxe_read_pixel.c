@@ -18,7 +18,8 @@ t_color	mlxe_read_pixel(t_texture *texture, int x, int y)
 	int		color;
 	char	*dst;
 
-	dst = texture->addr + (y * texture->size_line + x * (texture->bits_per_pixel / 8));
+	dst = texture->addr + (y * texture->size_line + x
+			* (texture->bits_per_pixel / 8));
 	color = *(unsigned int *)dst;
 	return ((t_color){color});
 }

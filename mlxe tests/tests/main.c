@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:15:25 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/13 16:19:10 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/06/13 17:12:34 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	loop(t_window *window, void *data)
 	mlxe_clear(window);
 	mlxe_draw_texture(window, texture, i, 0);
 	mlxe_draw_texture(window, texture, i + 100, 0);
-	mlxe_draw_subtexture(window, texture, 200, 200, (t_rect){20, 20, 100, 100});
+	mlxe_draw_subtexture(window, texture, (t_vector2){200, 200}, (t_rect){20, 20, 100, 100});
 	i = (i + 1) % 800;
-	mlxe_draw_line(window, (vec2){-100, 0}, (vec2){799+100, 599}, 0x00FF00FF);
+	mlxe_draw_line(window, (t_vector2){-100, 0}, (t_vector2){799+100, 599}, 0x00FF00FF);
 	mlxe_render(window);
 }
 
@@ -51,7 +51,7 @@ int	main(void)
 	window = mlxe_init(800, 600, "Hello, world!");
 	if (!window)
 		return (1);
-	t_texture	*texture = mlxe_load_texture(window, "tests/test.xpm", true);
+	t_texture	*texture = mlxe_load_texture(window, "tests/test.xpm", TRUE);
 	if (!texture)
 	{
 		printf("Failed to load texture\n");

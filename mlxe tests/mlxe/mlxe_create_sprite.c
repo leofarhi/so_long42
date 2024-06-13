@@ -13,7 +13,7 @@
 #include "mlxe.h"
 
 t_sprite	*mlxe_create_sprite(t_window *window, t_texture *texture,
-			t_rect rect, bool add_garbage)
+			t_rect rect, t_bool add_garbage)
 {
 	t_sprite	*sprite;
 
@@ -22,7 +22,7 @@ t_sprite	*mlxe_create_sprite(t_window *window, t_texture *texture,
 		return (NULL);
 	sprite->texture = texture;
 	sprite->rect = rect;
-	sprite->offset = (vec2){0, 0};
+	sprite->offset = (t_vector2){0, 0};
 	if (add_garbage)
 		mlxe_add_garbage(window, sprite, mlxe_free);
 	return (sprite);

@@ -14,12 +14,13 @@
 
 void	mlxe_draw_rect(t_window *window, t_rect rect, t_color color)
 {
-	mlxe_draw_line(window, (vec2){rect.x, rect.y},
-		(vec2){rect.x + rect.width, rect.y}, color);
-	mlxe_draw_line(window, (vec2){rect.x + rect.width, rect.y},
-		(vec2){rect.x + rect.width, rect.y + rect.height}, color);
-	mlxe_draw_line(window, (vec2){rect.x + rect.width, rect.y + rect.height},
-		(vec2){rect.x, rect.y + rect.height}, color);
-	mlxe_draw_line(window, (vec2){rect.x, rect.y + rect.height},
-		(vec2){rect.x, rect.y}, color);
+	mlxe_draw_line(window, (t_vector2){rect.x, rect.y},
+		(t_vector2){rect.x + rect.width, rect.y}, color);
+	mlxe_draw_line(window, (t_vector2){rect.x + rect.width, rect.y},
+		(t_vector2){rect.x + rect.width, rect.y + rect.height}, color);
+	mlxe_draw_line(window,
+		(t_vector2){rect.x + rect.width, rect.y + rect.height},
+		(t_vector2){rect.x, rect.y + rect.height}, color);
+	mlxe_draw_line(window, (t_vector2){rect.x, rect.y + rect.height},
+		(t_vector2){rect.x, rect.y}, color);
 }

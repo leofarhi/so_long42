@@ -6,18 +6,19 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:35:51 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/13 16:10:04 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/06/13 17:04:32 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MLX_EXT_H
-# define MLX_EXT_H
+#ifndef MLXE_H
+# define MLXE_H
 
-#include "mlxe_keys.h"
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <libft.h>
+# include "mlxe_keys.h"
+# include "mlxe_structs.h"
+# include <stdlib.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <libft.h>
 
 /*
 ** WELCOME TO MiniLibX Extended
@@ -25,86 +26,6 @@
 ** It provides additional features to the MiniLibX library
 ** such as sprites, textures, and garbage collection
 */
-
-#ifndef true
-# define true 1
-#endif
-
-#ifndef false
-# define false 0
-#endif
-
-#ifndef bool
-# define bool int
-#endif
-
-#define SUCCESS 1
-#define FAILURE 0
-
-typedef struct s_window t_window;
-
-typedef struct s_rect
-{
-	int x;
-	int y;
-	int width;
-	int height;
-}				t_rect;
-
-typedef struct s_vector2
-{
-	int x;
-	int y;
-}				t_vector2;
-
-#define vec2 t_vector2
-
-typedef struct s_texture
-{
-	void	*img;
-	t_vector2 size;
-	char	*addr;
-    int		bits_per_pixel;
-    int		size_line;
-    int		endian;
-}				t_texture;
-
-typedef struct s_sprite
-{
-	t_texture *texture;
-	t_rect	rect;
-	t_vector2 offset;
-}				t_sprite;
-
-typedef struct s_garbage
-{
-	void	*ptr;
-	void	(*free)(t_window *, void *);
-}				t_garbage;
-
-typedef struct s_window
-{
-	void		*mlx;
-	void		*win;
-	t_texture	*buffer;
-	t_list	*garbage;
-	bool		running;
-	void		*data;
-	void 		(*funct_ptr)(t_window *, void *data);
-	char		keys[MAX_ALL_KEYS];
-	vec2		mouse;
-}				t_window;
-
-#define uint unsigned int
-typedef unsigned int t_color;
-
-/*
-** mlxe_free - Free a pointer
-** is used to free a pointer that was added to the garbage collector
-** without using window parameter
-*/
-void	mlxe_free(t_window *window, void *ptr);
-
 /*
 ** mlxe_init - Initialize a window with a specific width, height, and title
 ** mlxe_clear - Clear the window
@@ -154,43 +75,58 @@ void	mlxe_free(t_window *window, void *ptr);
 ** mlxe_free_garbage - Free all pointers in the garbage collector
 ** 	returns true if all pointers are freed successfully
 ** 	returns false if memory allocation fails
+**
+**
+** mlxe_free - Free a pointer
+** is used to free a pointer that was added to the garbage collector
+** without using window parameter
 */
-t_window	*mlxe_init(int width, int height, char *title);//done
-void		mlxe_clear(t_window *window);//done
-void		mlxe_render(t_window *window);//done
-void		mlxe_destroy(t_window *window);//done
 
-void		mlxe_update_input(t_window *window);//done
-bool 		is_key_down(t_window *window, int keysym);//done
-bool 		is_key_pressed(t_window *window, int keysym);//done
-bool 		is_key_released(t_window *window, int keysym);//done
+void		mlxe_free(t_window *window, void *ptr);
+t_window	*mlxe_init(int width, int height, char *title);
+void		mlxe_clear(t_window *window);
+void		mlxe_render(t_window *window);
+void		mlxe_destroy(t_window *window);
 
-void		mlxe_loop(t_window *window, void (*funct_ptr)(t_window *, void *data), void *data);//done
-void		mlxe_loop_end(t_window *window);//done
+void		mlxe_update_input(t_window *window);
+t_bool		is_key_down(t_window *window, int keysym);
+t_bool		is_key_pressed(t_window *window, int keysym);
+t_bool		is_key_released(t_window *window, int keysym);
 
-t_color		mlxe_color(int r, int g, int b);//done
+void		mlxe_loop(t_window *window,
+				void (*funct_ptr)(t_window *, void *data), void *data);
+void		mlxe_loop_end(t_window *window);
 
-void		mlxe_draw_pixel(t_texture *texture, int x, int y, t_color color);//done
-t_color		mlxe_get_pixel(t_texture *texture, int x, int y);//done
-void		mlxe_write_pixel(t_texture *texture, int x, int y, t_color color);//done
-t_color		mlxe_read_pixel(t_texture *texture, int x, int y);//done
+t_color		mlxe_color(int r, int g, int b);
 
-void		mlxe_draw_line(t_window *window, t_vector2 p1, t_vector2 p2, t_color color);//done
-void		mlxe_draw_rect(t_window *window, t_rect rect, t_color color);//done
-void		mlxe_draw_fillrect(t_window *window, t_rect rect, t_color color);//done
+void		mlxe_draw_pixel(t_texture *texture, int x, int y, t_color color);
+t_color		mlxe_get_pixel(t_texture *texture, int x, int y);
+void		mlxe_write_pixel(t_texture *texture, int x, int y, t_color color);
+t_color		mlxe_read_pixel(t_texture *texture, int x, int y);
 
-t_texture	*mlxe_create_texture(t_window *window, int width, int height, bool add_garbage);//done
-t_texture	*mlxe_load_texture(t_window *window, char *path, bool add_garbage);//done
-t_sprite	*mlxe_create_sprite(t_window *window, t_texture *texture, t_rect rect, bool add_garbage);//done
+void		mlxe_draw_line(t_window *window,
+				t_vector2 p1, t_vector2 p2, t_color color);
+void		mlxe_draw_rect(t_window *window, t_rect rect, t_color color);
+void		mlxe_draw_fillrect(t_window *window, t_rect rect, t_color color);
 
-void		mlxe_free_texture(t_window *window, void *texture);//done
-void		mlxe_free_sprite(t_sprite *sprite);//done
+t_texture	*mlxe_create_texture(t_window *window,
+				int width, int height, t_bool add_garbage);
+t_texture	*mlxe_load_texture(t_window *window,
+				char *path, t_bool add_garbage);
+t_sprite	*mlxe_create_sprite(t_window *window,
+				t_texture *texture, t_rect rect, t_bool add_garbage);
 
-void		mlxe_draw_texture(t_window *window, t_texture *texture, int x, int y);//done
-void		mlxe_draw_subtexture(t_window *window, t_texture *texture, int x, int y, t_rect rect);//done
-void		mlxe_draw_sprite(t_window *window, t_sprite *sprite, int x, int y);//done
+void		mlxe_free_texture(t_window *window, void *texture);
+void		mlxe_free_sprite(t_sprite *sprite);
 
-bool		mlxe_add_garbage(t_window *window, void *ptr, void (*free)(t_window *, void *));//done
-void		mlxe_free_garbage(t_window *window);//done
+void		mlxe_draw_texture(t_window *window,
+				t_texture *texture, int x, int y);
+void		mlxe_draw_subtexture(t_window *window,
+				t_texture *texture, t_vector2 pos, t_rect rect);
+void		mlxe_draw_sprite(t_window *window, t_sprite *sprite, int x, int y);
+
+t_bool		mlxe_add_garbage(t_window *window,
+				void *ptr, void (*free)(t_window *, void *));
+void		mlxe_free_garbage(t_window *window);
 
 #endif

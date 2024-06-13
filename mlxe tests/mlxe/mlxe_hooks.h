@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlxe_keys.h                                        :+:      :+:    :+:   */
+/*   mlxe_hooks.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/13 16:09:30 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/13 16:44:16 by lfarhi           ###   ########.fr       */
+/*   Created: 2024/06/13 17:49:37 by lfarhi            #+#    #+#             */
+/*   Updated: 2024/06/13 18:01:58 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MLXE_KEYS_H
-# define MLXE_KEYS_H
+#ifndef MLXE_HOOKS_H
+# define MLXE_HOOKS_H
 
+# include <mlx.h>
+# include "mlxe.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include <stdio.h>
 
-# define STATE_NOTHING 0x00
-# define STATE_ONDOWN 0x01
-# define STATE_ONPRESSED 0x02
-# define STATE_ONRELEASE 0x03
-
-# define MAX_KEYS 65536
-# define MAX_MOUSE 6
-# define MAX_ALL_KEYS 65542
-
-# define MOUSE_LEFT 65537
-# define MOUSE_MIDDLE 65538
-# define MOUSE_RIGHT 65539
-# define MOUSE_SCROLL_UP 65540
-# define MOUSE_SCROLL_DOWN 65541
+void	init_keys(t_window *window);
+int		handle_keydown(int keysym, t_window *data);
+int		handle_keyrelease(int keysym, t_window *data);
 
 #endif

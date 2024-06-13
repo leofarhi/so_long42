@@ -15,5 +15,5 @@
 
 void	mlxe_loop_end(t_window *window)
 {
-	window->running = false;
+	window->running = FALSE;
 }

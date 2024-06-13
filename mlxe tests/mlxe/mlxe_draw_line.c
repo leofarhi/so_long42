@@ -12,76 +12,101 @@
 
 #include "mlxe.h"
 
-void clip_line(t_vector2 *p1, t_vector2 *p2, int width, int height)
+static t_bool	calcule_t(float *t, const float *p, const float *q, int i)
 {
-    float t0 = 0.0f;
-    float t1 = 1.0f;
-    float xdelta = p2->x - p1->x;
-    float ydelta = p2->y - p1->y;
+	float	r;
 
-    // Liste de délimiteurs
-    float p[] = {-xdelta, xdelta, -ydelta, ydelta};
-    float q[] = {p1->x, width - 1 - p1->x, p1->y, height - 1 - p1->y};
-
-    for (int i = 0; i < 4; i++)
-    {
-        if (p[i] == 0 && q[i] < 0)
-            return; // Ligne complètement en dehors
-        float r = q[i] / p[i];
-        if (p[i] < 0)
-        {
-            if (r > t1)
-                return;
-            else if (r > t0)
-                t0 = r;
-        }
-        else if (p[i] > 0)
-        {
-            if (r < t0)
-                return;
-            else if (r < t1)
-                t1 = r;
-        }
-    }
-
-    p2->x = p1->x + t1 * xdelta;
-    p2->y = p1->y + t1 * ydelta;
-    p1->x = p1->x + t0 * xdelta;
-    p1->y = p1->y + t0 * ydelta;
+	if (p[i] == 0 && q[i] < 0)
+		return (FALSE);
+	r = q[i] / p[i];
+	if (p[i] < 0)
+	{
+		if (r > t[1])
+			return (FALSE);
+		else if (r > t[0])
+			t[0] = r;
+	}
+	else if (p[i] > 0)
+	{
+		if (r < t[0])
+			return (FALSE);
+		else if (r < t[1])
+			t[1] = r;
+	}
+	return (TRUE);
 }
 
-void mlxe_draw_line(t_window *window, t_vector2 p1, t_vector2 p2, t_color color)
+void	clip_line(t_vector2 *p1, t_vector2 *p2, int width, int height)
 {
-    // Ajuster p1 et p2 pour qu'ils soient dans les limites de la fenêtre
-    clip_line(&p1, &p2, window->buffer->size.x, window->buffer->size.y);
+	const float	delta[2] = {p2->x - p1->x, p2->y - p1->y};
+	const float	p[] = {-delta[0], delta[0], -delta[1], delta[1]};
+	const float	q[] = {p1->x, width - 1 - p1->x, p1->y, height - 1 - p1->y};
+	float		t[2];
+	int			i;
 
-    t_vector2 delta;
-    t_vector2 sign;
-    t_vector2 error;
-    t_vector2 current;
-
-    delta.x = abs(p2.x - p1.x);
-    delta.y = abs(p2.y - p1.y);
-    sign.x = p1.x < p2.x ? 1 : -1;
-    sign.y = p1.y < p2.y ? 1 : -1;
-    error.x = delta.x - delta.y;
-    current = p1;
-    while (current.x != p2.x || current.y != p2.y)
-    {
-        mlxe_write_pixel(window->buffer, current.x, current.y, color);
-        if (current.x == p2.x && current.y == p2.y)
-            break ;
-        error.y = error.x * 2;
-        if (error.y > -delta.y)
-        {
-            error.x -= delta.y;
-            current.x += sign.x;
-        }
-        if (error.y < delta.x)
-        {
-            error.x += delta.x;
-            current.y += sign.y;
-        }
-    }
+	t[0] = 0.0f;
+	t[1] = 1.0f;
+	i = 0;
+	while (i < 4)
+	{
+		if (!calcule_t(t, p, q, i))
+			return ;
+		i++;
+	}
+	p2->x = p1->x + t[1] * delta[0];
+	p2->y = p1->y + t[1] * delta[1];
+	p1->x = p1->x + t[0] * delta[0];
+	p1->y = p1->y + t[0] * delta[1];
 }
 
+static t_vector2	init(t_vector2 *delta,
+	t_vector2 *sign, t_vector2 p1, t_vector2 p2)
+{
+	if (p1.x < p2.x)
+		delta->x = p2.x - p1.x;
+	else
+		delta->x = p1.x - p2.x;
+	if (p1.y < p2.y)
+		delta->y = p2.y - p1.y;
+	else
+		delta->y = p1.y - p2.y;
+	if (p1.x < p2.x)
+		sign->x = 1;
+	else
+		sign->x = -1;
+	if (p1.y < p2.y)
+		sign->y = 1;
+	else
+		sign->y = -1;
+	return (p1);
+}
+
+void	mlxe_draw_line(t_window *window,
+	t_vector2 p1, t_vector2 p2, t_color color)
+{
+	t_vector2	delta;
+	t_vector2	sign;
+	t_vector2	error;
+	t_vector2	current;
+
+	clip_line(&p1, &p2, window->buffer->size.x, window->buffer->size.y);
+	current = init(&delta, &sign, p1, p2);
+	error.x = delta.x - delta.y;
+	while (current.x != p2.x || current.y != p2.y)
+	{
+		mlxe_write_pixel(window->buffer, current.x, current.y, color);
+		if (current.x == p2.x && current.y == p2.y)
+			break ;
+		error.y = error.x * 2;
+		if (error.y > -delta.y)
+		{
+			error.x -= delta.y;
+			current.x += sign.x;
+		}
+		if (error.y < delta.x)
+		{
+			error.x += delta.x;
+			current.y += sign.y;
+		}
+	}
+}

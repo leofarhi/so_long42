@@ -22,11 +22,12 @@ static int	mlxe_loop_(t_window *window)
 	return (0);
 }
 
-void	mlxe_loop(t_window *window, void (*funct_ptr)(t_window *, void *data), void *data)
+void	mlxe_loop(t_window *window,
+	void (*funct_ptr)(t_window *, void *data), void *data)
 {
 	window->data = data;
 	window->funct_ptr = funct_ptr;
-	window->running = true;
+	window->running = TRUE;
 	mlx_loop_hook(window->mlx, mlxe_loop_, window);
 	mlx_loop(window->mlx);
 }

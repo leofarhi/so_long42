@@ -14,5 +14,6 @@
 
 void	mlxe_draw_sprite(t_window *window, t_sprite *sprite, int x, int y)
 {
-	mlxe_draw_subtexture(window, sprite->texture, x + sprite->offset.x, y + sprite->offset.y, sprite->rect);
+	mlxe_draw_subtexture(window, sprite->texture,
+		(t_vector2){x + sprite->offset.x, y + sprite->offset.y}, sprite->rect);
 }

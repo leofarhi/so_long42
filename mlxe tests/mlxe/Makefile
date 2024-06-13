@@ -6,7 +6,7 @@
 #    By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/12 16:08:55 by lfarhi            #+#    #+#              #
-#    Updated: 2024/06/13 01:13:13 by lfarhi           ###   ########.fr        #
+#    Updated: 2024/06/13 17:57:38 by lfarhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ ${SRC}mlxe_draw_texture.c ${SRC}mlxe_get_pixel.c ${SRC}mlxe_loop.c \
 ${SRC}mlxe_load_texture.c ${SRC}mlxe_update_input.c ${SRC}mlxe_color.c \
 ${SRC}mlxe_draw_fillrect.c ${SRC}mlxe_draw_rect.c ${SRC}mlxe_free_garbage.c \
 ${SRC}mlxe_read_pixel.c ${SRC}mlxe_write_pixel.c \
+${SRC}mlxe_handle_keys.c 
 
 OBJS = ${SRCS:.c=.o}
 
