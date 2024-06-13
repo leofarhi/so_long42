@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:15:25 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/13 18:44:30 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/06/14 01:30:45 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,24 @@ void	loop(t_window *window, void *data)
 	mlxe_draw_texture(window, texture, i, 0);
 	mlxe_draw_texture(window, texture, i + 100, 0);
 	mlxe_draw_subtexture(window, texture, (t_vector2){200, 200}, (t_rect){20, 20, 100, 100});
+	mlxe_draw_subtexture_size(window, texture, (t_coords){(t_rect){0, 0, 100, texture->size.y}, (t_rect){300, 300, 100, 100}}, 0x00FF00FF);
 	i = (i + 1) % 800;
 	mlxe_draw_line(window, (t_vector2){-100, 0}, (t_vector2){799+100, 599}, 0x00FF00FF);
+	mlxe_render(window);
+}
+
+void loop_text(t_window *window, void *data)
+{
+	t_font		*font = (t_font *)data;
+	static int	i = 0;
+	(void)window;
+	(void)font;
+
+	mlxe_clear(window);
+	mlxe_draw_text(window, font, "Hello, world!", (t_vector2){100, 100});
+	mlxe_draw_text(window, font, "AB CDEF", (t_vector2){i, 300});
+	mlxe_draw_text(window, font, "YAAA !", (t_vector2){200, i});
+	i = (i + 1) % 800;
 	mlxe_render(window);
 }
 
@@ -51,14 +67,23 @@ int	main(void)
 	window = mlxe_init(800, 600, "Hello, world!");
 	if (!window)
 		return (1);
-	t_texture	*texture = mlxe_load_texture(window, "tests/test.xpm", TRUE);
+	/*t_texture	*texture = mlxe_load_texture(window, "tests/test.xpm", TRUE);
 	if (!texture)
 	{
 		printf("Failed to load texture\n");
 		return (1);
 	}
 	
-	mlxe_loop(window, loop, texture);
+	mlxe_loop(window, loop, texture);*/
+	t_font	*font = mlxe_create_font(window, "tests/Triforce.xpm", FALSE);
+	if (!font)
+	{
+		printf("Failed to load font\n");
+		return (1);
+	}
+	mlxe_font_set_size(font, 90);
+	mlxe_font_set_color(font, mlxe_color(255, 0, 0));
+	mlxe_loop(window, loop_text, font);
 	mlxe_destroy(window);
 	printf("Hello, world!\n");
 	return (0);

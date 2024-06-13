@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 16:49:54 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/13 17:37:31 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/06/14 01:24:59 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ typedef struct s_rect
 	int	height;
 }				t_rect;
 
+typedef struct s_coords
+{
+	t_rect	src;
+	t_rect	dest;
+}				t_coords;
+
 typedef struct s_vector2
 {
 	int	x;
@@ -61,6 +67,21 @@ typedef struct s_sprite
 	t_rect		rect;
 	t_vector2	offset;
 }				t_sprite;
+
+typedef struct s_font
+{
+	t_texture	*texture;
+	t_color		color;
+	int			size;
+	int			widths[128 - 32];
+}				t_font;
+
+typedef struct s_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+}				t_rgb;
 
 typedef struct s_garbage
 {

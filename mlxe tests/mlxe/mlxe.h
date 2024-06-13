@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:35:51 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/13 17:04:32 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/06/14 01:25:14 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void		mlxe_loop(t_window *window,
 void		mlxe_loop_end(t_window *window);
 
 t_color		mlxe_color(int r, int g, int b);
+t_rgb		mlxe_extract_rgb(t_color color);
 
 void		mlxe_draw_pixel(t_texture *texture, int x, int y, t_color color);
 t_color		mlxe_get_pixel(t_texture *texture, int x, int y);
@@ -123,10 +124,18 @@ void		mlxe_draw_texture(t_window *window,
 				t_texture *texture, int x, int y);
 void		mlxe_draw_subtexture(t_window *window,
 				t_texture *texture, t_vector2 pos, t_rect rect);
+void		mlxe_draw_subtexture_size(t_window *window,
+				t_texture *texture, t_coords coords, t_color color);
 void		mlxe_draw_sprite(t_window *window, t_sprite *sprite, int x, int y);
 
 t_bool		mlxe_add_garbage(t_window *window,
 				void *ptr, void (*free)(t_window *, void *));
 void		mlxe_free_garbage(t_window *window);
+
+t_font		*mlxe_create_font(t_window *window, char *path, t_bool add_garbage);
+void		mlxe_free_font(t_window *window, void *font);
+void		mlxe_font_set_color(t_font *font, t_color color);
+void		mlxe_font_set_size(t_font *font, int size);
+void		mlxe_draw_text(t_window *window, t_font *font, char *text, t_vector2 pos);
 
 #endif
