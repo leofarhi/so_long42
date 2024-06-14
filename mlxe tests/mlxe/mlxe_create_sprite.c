@@ -19,11 +19,20 @@ t_sprite	*mlxe_create_sprite(t_window *window, t_texture *texture,
 
 	sprite = malloc(sizeof(t_sprite));
 	if (!sprite)
+	{
+		window->error = MLXE_ERROR_MALLOC;
 		return (NULL);
+	}
 	sprite->texture = texture;
 	sprite->rect = rect;
 	sprite->offset = (t_vector2){0, 0};
 	if (add_garbage)
-		mlxe_add_garbage(window, sprite, mlxe_free);
+		if (!mlxe_add_garbage(window, sprite, mlxe_free))
+			return (NULL);
 	return (sprite);
+}
+
+void	mlxe_sprite_set_offset(t_sprite *sprite, t_vector2 offset)
+{
+	sprite->offset = offset;
 }

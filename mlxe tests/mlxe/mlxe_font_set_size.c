@@ -14,5 +14,5 @@
 
 void	mlxe_font_set_size(t_font *font, int size)
 {
-    font->size = size;
+	font->size = size;
 }

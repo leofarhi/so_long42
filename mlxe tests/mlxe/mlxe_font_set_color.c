@@ -14,5 +14,5 @@
 
 void	mlxe_font_set_color(t_font *font, t_color color)
 {
-    font->color = color;
+	font->color = color;
 }

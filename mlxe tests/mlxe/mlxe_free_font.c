@@ -12,7 +12,7 @@
 
 #include "mlxe.h"
 
-void    mlxe_free_font(t_window *window, void *font)
+void	mlxe_free_font(t_window *window, void *font)
 {
 	t_font	*f;
 

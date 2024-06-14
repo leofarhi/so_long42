@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 15:14:38 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/13 18:43:45 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/06/14 16:00:25 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,8 @@ t_window	*mlxe_init(int width, int height, char *title)
 		return (exit_free_(window, window->mlx, window->win, window->buffer));
 	window->garbage = NULL;
 	window->running = FALSE;
+	window->error = MLXE_ERROR_NONE;
 	init_keys(window);
-	mlx_hook(window->win, KeyPress, KeyPressMask, &handle_keydown, window);
-	mlx_hook(window->win, KeyRelease,
-		KeyReleaseMask, &handle_keyrelease, window);
 	mlx_hook(window->win, 17, 0, &handle_close, window);
 	mlx_mouse_hook(window->win, &handle_mousedown, window);
 	mlx_hook(window->win, ButtonRelease,

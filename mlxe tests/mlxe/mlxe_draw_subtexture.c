@@ -33,6 +33,8 @@ static void	change_bounds(t_window *window,
 		rect->height = texture->size.y - rect->y;
 	if (pos->x + rect->width > window->buffer->size.x)
 		rect->width = window->buffer->size.x - pos->x;
+	if (pos->y + rect->height > window->buffer->size.y)
+		rect->height = window->buffer->size.y - pos->y;
 }
 
 void	mlxe_draw_subtexture(t_window *window,
