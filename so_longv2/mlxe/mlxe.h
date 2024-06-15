@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:35:51 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/14 16:04:55 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/06/15 19:11:01 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ void		mlxe_render(t_window *window);
 void		mlxe_destroy(t_window *window);
 
 void		mlxe_update_input(t_window *window);
-t_bool		is_key_down(t_window *window, int keysym);
-t_bool		is_key_pressed(t_window *window, int keysym);
-t_bool		is_key_released(t_window *window, int keysym);
+t_bool		mlxe_is_key_down(t_window *window, int keysym);
+t_bool		mlxe_is_key_pressed(t_window *window, int keysym);
+t_bool		mlxe_is_key_released(t_window *window, int keysym);
 
 void		mlxe_loop(t_window *window,
 				void (*funct_ptr)(t_window *, void *data), void *data);

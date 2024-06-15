@@ -6,15 +6,18 @@
 #    By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 15:45:34 by lfarhi            #+#    #+#              #
-#    Updated: 2024/06/14 20:21:04 by lfarhi           ###   ########.fr        #
+#    Updated: 2024/06/15 23:04:12 by lfarhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 SRC = srcs/
-SRCS = ${SRC}main.c ${SRC}main_loop.c ${SRC}map.c
+SRCS = ${SRC}main.c ${SRC}main_loop.c ${SRC}map.c ${SRC}title_ui.c
 SRCS += ${SRC}parsing/parsing.c ${SRC}parsing/map_loader.c
 SRCS += ${SRC}asset/asset_loader.c
+SRCS += ${SRC}entities/player.c ${SRC}entities/entities_loader.c
+SRCS += ${SRC}entities/entities.c ${SRC}entities/chest.c
+SRCS += ${SRC}entities/exit.c
 
 OBJS = ${SRCS:.c=.o}
 

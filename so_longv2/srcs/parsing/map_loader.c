@@ -88,6 +88,10 @@ t_bool	load_map(t_game *game, char **grid)
 	size_t	y;
 
 	y = 0;
+	game->map.cam.x = 0;
+	game->map.cam.y = 0;
+	game->map.entities = NULL;
+	game->map.collectible_countdown = 0;
 	game->map.grid = malloc(sizeof(t_tile *) * game->map.height);//TODO: Protect malloc
 	if (!game->map.grid)
 		return (print_error("Failed to malloc map"));//TODO check if we need to free data
@@ -104,8 +108,8 @@ t_bool	load_map(t_game *game, char **grid)
 			else
 			{
 				game->map.grid[y][x].tileset = 0;
-				//if (!spawn_entity(game, grid[y][x], x, y))
-				//	return (print_error("Failed to spawn entity"));//TODO clear map
+				if (!spawn_entity(game, grid[y][x], x, y))
+					return (print_error("Failed to spawn entity"));//TODO clear map
 			}
 			x++;
 		}
