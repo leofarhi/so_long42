@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "stdio.h": "c",
+        "so_long.h": "c",
+        "mlxe.h": "c",
+        "libft.h": "c",
+        "unistd.h": "c",
+        "stdlib.h": "c"
+    }
+}
