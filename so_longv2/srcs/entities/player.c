@@ -25,25 +25,23 @@ void	want_to_move(t_game *game, struct s_entity *entity, int x, int y)
 	if (game->map.grid[entity->pos.y / TILE_SIZE + y][entity->pos.x / TILE_SIZE + x].tileset == 0)
 	{
 		entity->anim_countdown = 6;
+		game->step++;
+		game->cadence.player_moving = TRUE;
 	}
 }
 
 void	player_update(t_game *game, struct s_entity *entity)
 {
-	(void)game;
-	(void)entity;
-	//<X11/keysym.h>
-	//printf("x: %d, y: %d\n", entity->pos.x, entity->pos.y);
-	
+	game->cadence.player_moving = FALSE;
 	if (!entity->anim_countdown)
 	{
-		if (mlxe_is_key_down(game->window, XK_w) || mlxe_is_key_down(game->window, XK_Up))
+		if (mlxe_is_key_pressed(game->window, XK_w) || mlxe_is_key_pressed(game->window, XK_Up))
 			want_to_move(game, entity, 0, -1);
-		else if (mlxe_is_key_down(game->window, XK_s) || mlxe_is_key_down(game->window, XK_Down))
+		else if (mlxe_is_key_pressed(game->window, XK_s) || mlxe_is_key_pressed(game->window, XK_Down))
 			want_to_move(game, entity, 0, 1);
-		else if (mlxe_is_key_down(game->window, XK_a) || mlxe_is_key_down(game->window, XK_Left))
+		else if (mlxe_is_key_pressed(game->window, XK_a) || mlxe_is_key_pressed(game->window, XK_Left))
 			want_to_move(game, entity, -1, 0);
-		else if (mlxe_is_key_down(game->window, XK_d) || mlxe_is_key_down(game->window, XK_Right))
+		else if (mlxe_is_key_pressed(game->window, XK_d) || mlxe_is_key_pressed(game->window, XK_Right))
 			want_to_move(game, entity, 1, 0);
 		entity->sprite_idx = (entity->dir*3) + 1;
 	}

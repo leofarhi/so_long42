@@ -54,5 +54,14 @@ t_bool	load_assets(t_game *game)
 		game->assets.exit[i] = mlxe_create_sprite(game->window, exit_texture, (t_rect){i * 48, 0, 48, 48}, TRUE);
 		printf("exit[%d]: %p\n", i, game->assets.exit[i]);//TODO remove this line
 	}
+
+	//UI:
+	//Heart
+	game->assets.ui[0] = mlxe_load_texture(game->window, "assets/ui/heart.xpm", TRUE);//TODO Check if loading is successful
+	printf("ui[0]: %p\n", game->assets.ui[0]);//TODO remove this line
+	//Cadence_center
+	game->assets.ui[1] = mlxe_load_texture(game->window, "assets/ui/cadence_center.xpm", TRUE);//TODO Check if loading is successful
+	printf("ui[1]: %p\n", game->assets.ui[1]);//TODO remove this line
+	
 	return (SUCCESS);
 }

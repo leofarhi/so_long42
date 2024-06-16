@@ -26,6 +26,7 @@ static t_bool	assign_entity(t_game *game, char c, t_entity *entity)
 		entity->sprites = game->assets.player;
 		entity->life = 3;
 		entity->update = player_update;
+		entity->sprite_idx = 1;
 		return (TRUE);
 	}
 	if (c == 'C')
@@ -62,6 +63,12 @@ t_bool	spawn_entity(t_game *game, char c, int x, int y)
 	entity = malloc(sizeof(t_entity));
 	if (!entity)
 		return (print_error("Failed to malloc entity"));//TODO change to return (FALSE);
+	entity->pos.x = x * TILE_SIZE;
+	entity->pos.y = y * TILE_SIZE;
+	entity->id = c;
+	entity->dir = 0;
+	entity->anim_countdown = 0;
+	entity->sprite_idx = 0;
 	if (!assign_entity(game, c, entity))
 	{
 		free(entity);
@@ -73,12 +80,6 @@ t_bool	spawn_entity(t_game *game, char c, int x, int y)
 		free(entity);
 		return (print_error("Failed to malloc entity"));//TODO change to return (FALSE);
 	}
-	entity->pos.x = x * TILE_SIZE;
-	entity->pos.y = y * TILE_SIZE;
-	entity->id = c;
-	entity->dir = 0;
-	entity->anim_countdown = 0;
-	entity->sprite_idx = 0;
 	if (c == 'P')
 		ft_lstadd_back(&game->map.entities, new);
 	else

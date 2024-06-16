@@ -56,6 +56,7 @@ int main()
 	game.sprite_update = FALSE;
 	game.player = NULL;
 	game.step = 0;
+	cadence_init(&game);
 	load_assets(&game);//TODO Check if loading is successful
 	parse_map(&game, "maps/test.ber");//TODO Check if loading is successful
 	print_map(&game.map);//TODO remove this line

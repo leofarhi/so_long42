@@ -34,6 +34,7 @@ void	exit_loop(t_window *window, void *data)
 	mlxe_draw_sprite(game->window, game->exit->sprites[0],
 			game->exit->pos.x - game->map.cam.x,
 			game->exit->pos.y - game->map.cam.y);
+	draw_game_ui(game);
 	mlxe_render(window);
 }
 
@@ -49,7 +50,10 @@ void	quit_loop(t_window *window, void *data)
 	if (i < game->window->buffer->size.x + 400)
 		i += 10;
 	else
+	{
+		printf("Congratulations! You finished the game in %d steps!\n", game->step);//TODO: Change this to a proper message
 		mlxe_loop_end(window);
+	}
 	mlxe_draw_fillrect(game->window, (t_rect){0, 0,
 	i, game->window->buffer->size.y}, 0);
 	mlxe_font_set_color(game->assets.font, mlxe_color(255, 255, 255));

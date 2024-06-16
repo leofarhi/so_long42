@@ -39,6 +39,7 @@ typedef struct s_assets
 	t_sprite	*player[12];
 	t_sprite	*chest[4];
 	t_sprite	*exit[2];
+	t_texture	*ui[2];
 	t_font		*font;
 }				t_assets;
 
@@ -53,6 +54,12 @@ typedef struct s_entity
 	char		anim_countdown;
 	void		(*update)(t_game *game, struct s_entity *entity);
 }				t_entity;
+
+typedef struct s_cadence
+{
+	float		beats[5];
+	t_bool		player_moving;
+}				t_cadence;
 
 typedef struct s_map
 {
@@ -73,6 +80,7 @@ typedef struct s_game
 	t_entity	*exit;
 	t_bool		sprite_update;
 	int			step;
+	t_cadence	cadence;
 }	t_game;
 
 int		print_error(char *msg);
@@ -98,5 +106,11 @@ int		truemod(int a, int b);
 
 void	draw_text_outline(t_window *window,
 	t_font *font, char *text, t_vector2 pos);
+
+void	draw_game_ui(t_game *game);
+
+void	cadence_init(t_game *game);
+void	cadence_update(t_game *game);
+void	cadence_draw(t_game *game);
 
 #endif
