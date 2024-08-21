@@ -4,5 +4,4 @@ minilibx/*
 mlxe/libmlxe.a
 libft/libft.a
 map_generator.py
-maps/*
 .vscode/*
