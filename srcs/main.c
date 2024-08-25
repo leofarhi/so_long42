@@ -38,6 +38,7 @@ static void	init_game(t_game *game)
 	game->step = 0;
 	game->error_msg = NULL;
 	game->map.grid = NULL;
+	game->map.entities = NULL;
 }
 
 static t_bool	start_map(t_game *game, char *map_path)

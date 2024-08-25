@@ -46,7 +46,7 @@ size_t	gnl_strlen(char *str)
 	i = 0;
 	if (str == NULL)
 		return (0);
-	while (str[i] && str[i] != '\n')
+	while (str[i] && str[i] != '\n' && str[i] != 13)
 		i++;
 	return (i);
 }
