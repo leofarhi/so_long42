@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:32:21 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/07/08 15:13:19 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/08/27 17:21:27 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ static t_bool	check_border(t_game *game)
 	i = 0;
 	while (i < game->map.width)
 	{
-		if (game->map.grid[i][0].tileset != 1
-			|| game->map.grid[i][game->map.height - 1].tileset != 1)
+		if (game->map.grid[0][i].tileset != 1
+			|| game->map.grid[game->map.height - 1][i].tileset != 1)
 			return (set_error(game, "Map is not surrounded by walls"));
 		i++;
 	}
 	i = 0;
 	while (i < game->map.height)
 	{
-		if (game->map.grid[0][i].tileset != 1
-			|| game->map.grid[game->map.width - 1][i].tileset != 1)
+		if (game->map.grid[i][0].tileset != 1
+			|| game->map.grid[i][game->map.width - 1].tileset != 1)
 			return (set_error(game, "Map is not surrounded by walls"));
 		i++;
 	}
