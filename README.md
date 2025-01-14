@@ -1,4 +1,4 @@
-#so_long
+# so_long
 
 **so_long** est un projet développé dans le cadre de mon cursus à l'école 42. Il s'agit d'un mini-jeu en 2D, conçu en utilisant la bibliothèque graphique MiniLibX. Ce projet m'a permis de mettre en pratique des compétences en programmation tout en créant une version améliorée de la MiniLibX, disponible ici : [MiniLibX-Extended](https://github.com/leofarhi/MiniLibX-Extended).
 
